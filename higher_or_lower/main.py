@@ -21,7 +21,7 @@ while choice == highest:
     choice = input("Who has more followers? Type 'A' or 'B': ")
     choice = a['follower_count'] if choice == 'A' else b['follower_count']
     score += 1
-    b = a.copy()
+    b = a
     b == random.choice(data)
     while b == a:
         b = random.choice(data)
@@ -29,4 +29,4 @@ while choice == highest:
 
 os.system('clear')
 print(logo)
-print(f"Sorry, You lost !!!. Your score: {score}.")
+print(f"Sorry, You lost !!!. Your score: {score - 1}.")
