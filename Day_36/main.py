@@ -6,9 +6,9 @@ import requests
 STOCK = "AAPL"
 MY_NUM = +12707785487
 
-ALPHAVANTAGE_API_KEY = "8P4A4NI73SAZOOWT"
+ALPHAVANTAGE_API_KEY = ""
 ALPHAVANTAGE_ENDPOINT = "https://www.alphavantage.co/query"
-NEWS_API_KEY = "450281c0ad6d424d8d7df176f61b602a"
+NEWS_API_KEY = ""
 NEWS_API_ENDPOINT = "https://newsapi.org/v2/top-headlines"
 
 yesterday = str(dt.datetime.today()-timedelta(days=1)).split()[0]
@@ -55,7 +55,7 @@ for i in range(3):
     report += f"\n\nHeadline: {headline}\nBrief: {brief}\n\n"
 
 account_sid = 'AC3e54c7fa832bb21265e4c3827513ea34'
-auth_token = '76a7d7af1dfd97b11843f5e264a428ae'
+auth_token = ''
 client = Client(account_sid, auth_token)
 
 
