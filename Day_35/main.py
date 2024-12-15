@@ -17,7 +17,7 @@ response = requests.get(API_ENDPOINT, params=params)
 weather_condition = response.json()["current"]["condition"]["text"]
 report = f"Hey Buddy, Today is gonna be a {weather_condition} day."
 
-account_sid = ''
+#account_sid = ''
 auth_token = ""
 client = Client(account_sid, auth_token)
 
