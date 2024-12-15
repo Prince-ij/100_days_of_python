@@ -54,7 +54,7 @@ for i in range(3):
     brief = articles[i]['description']
     report += f"\n\nHeadline: {headline}\nBrief: {brief}\n\n"
 
-account_sid = 'AC3e54c7fa832bb21265e4c3827513ea34'
+account_sid = ''
 auth_token = ''
 client = Client(account_sid, auth_token)
 
