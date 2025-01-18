@@ -1,0 +1,17 @@
+body {
+    background-color: aquamarine;
+}
+
+hr {
+    border-style: dotted;
+    color: red;
+    font-size: 50px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
