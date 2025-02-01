@@ -19,7 +19,7 @@ Bootstrap(app)
 t= datetime.now()
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_url, 'posts.db')}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(base_url, 'posts.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

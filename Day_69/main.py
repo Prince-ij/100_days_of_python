@@ -22,8 +22,8 @@ login_manager.init_app(app)
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_url, 'blog.db')}'
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_url, 'users.db')}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_url, "blog.db")}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_url, "users.db")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
