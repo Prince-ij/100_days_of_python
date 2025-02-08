@@ -1,4 +1,4 @@
-from turtle import Turtle
+              from turtle import Turtle
 
 UP = 90
 RIGHT = 0
