@@ -258,5 +258,5 @@ class Edit:
 
         if file_path:
             im = im.resize(self.original_size)
-            im.save(file_path, optimize=True)
+            im.save(file_path, optimize=True, dpi=(600, 600))
             messagebox.showinfo('success', 'File Saved Successfully')

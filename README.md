@@ -1,6 +1,9 @@
 # 100 Days of Python - My Professional Development Journey
 Welcome to my 100 Days of Python repository! 🚀 This is where I embark on a structured, project-driven journey to master Python, progressing from a beginner to a professional-level developer. Each day, I tackle a new project, reinforcing my understanding of core programming concepts, libraries, and real-world applications.
 
+## Tutor
+Angela Yu's 100 days of Python, Udemy Course
+
 ## **Project Categories**  
 
 Throughout this journey, I have worked on projects across diverse domains, each designed to reinforce key programming concepts and real-world applications:  
