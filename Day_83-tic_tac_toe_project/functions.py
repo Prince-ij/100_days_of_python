@@ -15,6 +15,8 @@ def check_fill(pos):
     value = game_bar[pos]
     return True if isinstance(value, float) else False
 
+def is_full():
+    if  all(isinstance(game_bar[i], str) for i in game_bar): return True
 
 def check_valid(pos):
     if pos in game_bar.keys():
@@ -39,16 +41,20 @@ def game_instructions():
         os.system('clear')
 
 def game(player_1, player_2):
-    condition = any(math.isnan(value) for value in game_bar.values() if isinstance(value, float))
 
-    while(condition):
-        player_1.play()
-        if check_win():
-            print(f'{player_1.name} wins the Game')
-            break
-        player_2.play()
-        if check_win():
-            print(f'{player_2.name} wins the Game')
-            break
-    else:
-        print('No winner')
+
+    while True:
+            if is_full():
+                print('No Capcity Among you. It\'s a tie. Losers')
+                break
+            player_1.play()
+            if check_win():
+                print(f'{player_1.name} wins the Game')
+                break
+            if is_full():
+                print('No Capcity Among you. It\'s a tie. Losers')
+                break
+            player_2.play()
+            if check_win():
+                print(f'{player_2.name} wins the Game')
+                break

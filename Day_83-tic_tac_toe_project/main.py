@@ -21,16 +21,16 @@ else:
     print('************* Get ready to be Crushed by My gaming Prowess ***************')
     choice = False
 
-time.sleep(3)
+time.sleep(2)
 os.system('clear')
 
 print('************* Player One ****************')
-player_1 = Player(input('Your name : '), input('Choose a Letter, X or Y: '))
+player_1 = Player(input('Your name : '), input('Choose a Letter, X or O: '))
 os.system('clear')
 print('************* Player Two ****************')
 if choice == False:
-    player_2 = Player('Computer', 'X' if player_1.letter == 'Y' else 'Y', auto=True)
+    player_2 = Player('Computer', 'X' if player_1.letter == 'O' else 'O', auto=True)
 else:
-    player_2 = Player(input('Your name : '), 'X' if player_1.letter == 'Y' else 'Y')
+    player_2 = Player(input('Your name : '), 'X' if player_1.letter == 'O' else 'O')
 
 game(player_1, player_2)

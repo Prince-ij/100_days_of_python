@@ -32,6 +32,7 @@ class Player:
                     print('Are you blind, position has already been filled')
                     continue
 
+
             game_bar[pos] = self.letter
             break
         os.system('clear')
