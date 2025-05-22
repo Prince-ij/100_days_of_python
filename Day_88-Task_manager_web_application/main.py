@@ -1,9 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin, LoginManager, login_user, current_user
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -12,6 +16,7 @@ base_dir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_dir, "data.sqlite")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', "Gibbrish2xy567849345")
 db = SQLAlchemy(app)
 
 
@@ -54,6 +59,9 @@ class Task(db.Model):
 
     owner = db.relationship('User', back_populates='todos', lazy=True)
 
+with app.app_context():
+    db.create_all()
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -67,13 +75,32 @@ def home():
 
     return render_template('index.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    pass
+    if request.method == 'POST':
+        email = request.form['email']
+        passwd = request.form['passwd']
+        cpasswd = request.form['cpasswd']
+        if passwd != cpasswd:
+            flash('Passwords do not Match', "error")
+            return redirect(url_for('register'))
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('User already exists', "error")
+            return redirect(url_for('register'))
+        else:
+            passwd = generate_password_hash(cpasswd)
+            user = User(email, passwd)
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('login'))
+    return render_template('signup.html')
+
+
 
 @app.route('/login')
 def login():
-    pass
+    return render_template('login.html')
 
 @app.route('/todo_list')
 def create_todo_list():
