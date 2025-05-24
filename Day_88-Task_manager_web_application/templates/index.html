@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Home - Task Manager</title>
 </head>
 <body>
     <nav>
-        <a href="#">Sign Up</a>
-        <a href="#">Log In</a>
+        <p>TaskLight</p>
+        <a href="{{ url_for('register') }}">Sign Up</a>
+        <a href="{{ url_for('login') }}">Log In</a>
     </nav>
-    <h1>Task Manager</h1>
-    <p>The World's simplest Task Manager. Just create a project and manage your tasks under it.</p>
+    <div class="hero">
+        <h1>TaskLight</h1>
+        <p>The World's simplest Task Manager. Just create a project and manage your tasks under it.</p>
 
-    <h3>It's just a sign up away to start using the application</h3>
-    <button><a href="#">Sign Up</a>
-    </button>
+    </div>
+
+    <div class="action">
+         <h3>It's just a sign up away to start using the application</h3>
+        <button><a href="{{ url_for('register') }}">Sign Up</a>
+        </button>
+    </div>
+    
+    <footer>
+        Copyright @ prince Ij
+    </footer>
+
 </body>
 </html>

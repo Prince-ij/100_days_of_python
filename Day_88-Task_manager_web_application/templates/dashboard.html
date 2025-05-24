@@ -3,33 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Dashboard</title>
 </head>
 <body>
     <h1> Welcome to Your Dashboard</h1>
 
-    <div class="projects">
+    <div class="contents">
+        <div class="projects">
         <h2>Create a Project</h2>
-        <button>+</button>
+        <button class="create" onclick="addProject()">+</button>
 
         <h3>Projects</h3>
-        <button>Project 1</button>
-        <button>Project 2</button>
-        <button>Project 3</button>
-        <button>Project 4</button>
-        <button>Project 5</button>
+        <div class="groups-project">
+            <button onclick="openProject()">Project 1</button>
+            <button>Project 2</button>
+            <button>Project 3</button>
+            <button>Project 4</button>
+            <button>Project 5</button>
+        </div>
+
     </div>
 
     <div class="tasks">
         <h2>Create a Task</h2>
-        <button>+</button>
+        <button class="create" onclick="addTask()">+</button>
         <h3>Tasks</h3>
-        <p>Task 1 <button>✖</button></p>
-        <p>Task 1 <button>✖</button></p>
-        <p>Task 1 <button>✖</button></p>
-        <p>Task 1 <button>✖</button></p>
-        <p>Task 1 <button>✖</button></p>
+        <div class="groups-task">
+            <div><p>Eat Fufu and Drink Garri and beans later in the afternoon <sub><button>✖</button></sub></p></div>
+            <div><p>Wash my laundry and dry and iron <sub><button>✖</button></sub></p> </div>
+            <div><p>Task 3 <sub><button>✖</button></sub></p></div>
+                <div><p>Task 5 <sub><button>✖</button></sub></p></div>
+                <div><p>Task 4 <sub><button>✖</button></sub></p></div>
+        </div>
+
+    </div>
     </div>
 
+    <div class="project-form">
+        <form>
+            <fieldset>
+                <legend>Input Project Name</legend>
+                <input type="text" name="project-name" placeholder="Project 1">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="add-task-form">
+        <h2>Create a Task</h2>
+        <button class="add-task" onclick="addTask()">+</button>
+        <h3>Tasks</h3>
+        <div class="groups-task">
+            <div><p>Eat Fufu and Drink Garri and beans later in the afternoon <sub><button>✖</button></sub></p></div>
+            <div><p>Wash my laundry and dry and iron <sub><button>✖</button></sub></p> </div>
+            <div><p>Task 3 <sub><button>✖</button></sub></p></div>
+            <div><p>Task 5 <sub><button>✖</button></sub></p></div>
+            <div><p>Task 4 <sub><button>✖</button></sub></p></div>
+
+    </div>
+        <button class="close-project" onclick="closeProject()">Close Project</button>
+    </div>
+
+    <div class="task-form">
+        <form>
+            <fieldset>
+                <legend>Add a task</legend>
+                <input type="text" name="task-name" placeholder="Task 1">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+
+    <script src="../static/index.js"></script>
 </body>
 </html>

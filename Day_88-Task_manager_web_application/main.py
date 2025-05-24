@@ -102,6 +102,10 @@ def register():
 def login():
     return render_template('login.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/todo_list')
 def create_todo_list():
     pass
@@ -130,5 +134,4 @@ def fetch_todo_lists():
 def fetch_tasks(todolist_id):
     pass
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
