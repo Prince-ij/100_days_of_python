@@ -25,12 +25,13 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.String)
 
-    todos = db.relationship('Task', back_populates='owner', lazy=True)
+    tasks = db.relationship('Task', back_populates='owner', lazy=True)
     projects = db.relationship('Project', back_populates='owner', lazy=True)
 
     def __init__(self, email, password):
         self.email = email
         self.password = password
+
 
 
 class Project(db.Model):
@@ -57,7 +58,7 @@ class Task(db.Model):
         self.body = body
         self.project_id = project_id
 
-    owner = db.relationship('User', back_populates='todos', lazy=True)
+    owner = db.relationship('User', back_populates='tasks', lazy=True)
 
 with app.app_context():
     db.create_all()
@@ -65,7 +66,8 @@ with app.app_context():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    user = User.query.filter_by(id=user_id).first()
+    return user
 
 
 
@@ -98,40 +100,73 @@ def register():
 
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        passwd = request.form.get('passwd')
+
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            flash('User not Found', "error")
+            return redirect(url_for('login'))
+
+        if not check_password_hash(user.password, passwd):
+            flash('Wrong Password buddy, Try again', "error")
+            return redirect(url_for('login'))
+
+        login_user(user)
+        return redirect(url_for('dashboard'))
+
     return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    user_projects = current_user.projects
+    user_tasks = current_user.tasks
+    return render_template('dashboard.html', projects=user_projects, tasks=user_tasks, user=current_user)
 
-@app.route('/todo_list')
-def create_todo_list():
-    pass
+@app.route('/create_project/<int:user_id>',  methods=['GET', 'POST'])
+def create_project(user_id):
+    if request.method == 'POST':
+        name = request.form.get('name')
+        if name:
+            project = Project(user_id, name)
+            db.session.add(project)
+            db.session.commit()
+            flash(f'Project {name} Created Successfully', "success")
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Error: Project name must be set', "error")
+            return redirect(url_for('dashboard'))
 
-@app.route('/delete_todolist/<int:todolist_id>')
-def delete_todolist(task_id, todolist_id):
-    pass
+@app.route('/create_task/<int:user_id>', methods=['GET', 'POST'])
+def create_task(user_id):
+    if request.method == 'POST':
+        body = request.form.get('body')
+        if body:
+            task = Task(user_id, body)
+            db.session.add(task)
+            db.session.commit()
+            flash(f'Task Created Successfully', "success")
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Error: Task must be specified', "error")
+            return redirect(url_for('dashboard'))
 
-@app.route('/add_task/<int:todolist_id>')
-def add_task(todolist_id):
-    pass
+@app.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    flash('Task has been Deleted Successfully', 'success')
+    return redirect(url_for('dashboard'))
 
-@app.route('/delete_task/<int:task_id>/<int:todolist_id>')
-def delete_task(task_id, todolist_id):
-    pass
-
-@app.route('/modify_task/<int:task_id>/<int:todolist_id>')
-def modify_task(task_id, todolist_id):
-    pass
-
-@app.route('/dashboard')
-def fetch_todo_lists():
-    pass
-
-@app.route('/tasks/<int:todolist_id>')
-def fetch_tasks(todolist_id):
-    pass
-
-
+@app.route('/delete_project/<int:project_id>', methods=['GET', 'POST'])
+def delete_project(project_id):
+    project = Task.query.get(project_id)
+    db.session.delete(project)
+    db.session.commit()
+    flash('Project has been Deleted Successfully', 'success')
+    return redirect(url_for('dashboard'))

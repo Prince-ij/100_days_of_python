@@ -7,6 +7,16 @@
     <title>Dashboard</title>
 </head>
 <body>
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message" onclick="errorBtn()">
+                    <p>{{ message }}</p>
+                    <button>X</button>
+                </div>
+            {% endfor %}
+         {% endif %}
+       {% endwith %}
     <h1> Welcome to Your Dashboard</h1>
 
     <div class="contents">
@@ -15,13 +25,16 @@
         <button class="create" onclick="addProject()">+</button>
 
         <h3>Projects</h3>
+
+        {% if not projects %}
+            <p class="no-projects">No Projects Yet</p>
+        {% else %}
         <div class="groups-project">
-            <button onclick="openProject()">Project 1</button>
-            <button>Project 2</button>
-            <button>Project 3</button>
-            <button>Project 4</button>
-            <button>Project 5</button>
+        {% for project in projects %}
+            <button onclick="openProject()">{{ project.name }}</button>
+         {% endfor %}
         </div>
+        {% endif %}
 
     </div>
 
@@ -29,22 +42,26 @@
         <h2>Create a Task</h2>
         <button class="create" onclick="addTask()">+</button>
         <h3>Tasks</h3>
+         {% if not projects %}
+            <p class="no-projects">No Tasks Yet</p>
+        {% else %}
         <div class="groups-task">
-            <div><p>Eat Fufu and Drink Garri and beans later in the afternoon <sub><button>✖</button></sub></p></div>
-            <div><p>Wash my laundry and dry and iron <sub><button>✖</button></sub></p> </div>
-            <div><p>Task 3 <sub><button>✖</button></sub></p></div>
-                <div><p>Task 5 <sub><button>✖</button></sub></p></div>
-                <div><p>Task 4 <sub><button>✖</button></sub></p></div>
+        {% for task in tasks %}
+             <div><p>{{ task.body }}<sub><a href="{{ url_for('delete_task', task_id=task.id) }}"><button>✖</button></a></sub></p></div>
+         {% endfor %}
         </div>
+        {% endif %}
+
+
 
     </div>
     </div>
 
     <div class="project-form">
-        <form>
+        <form action="{{ url_for('create_project', user_id=user.id)}}" method="post">
             <fieldset>
                 <legend>Input Project Name</legend>
-                <input type="text" name="project-name" placeholder="Project 1">
+                <input type="text" name="name" placeholder="Project 1">
                 <input type="submit">
             </fieldset>
         </form>
@@ -62,14 +79,18 @@
             <div><p>Task 4 <sub><button>✖</button></sub></p></div>
 
     </div>
+    <div class="close-project">
         <button class="close-project" onclick="closeProject()">Close Project</button>
+        <button class="delete-project" onclick="closeProject()">Delete Project</button>
+    </div>
+
     </div>
 
     <div class="task-form">
-        <form>
+        <form action="{{ url_for('create_task', user_id=user.id)}}" method="post">
             <fieldset>
                 <legend>Add a task</legend>
-                <input type="text" name="task-name" placeholder="Task 1">
+                <input type="text" name="body" placeholder="Task 1">
                 <input type="submit">
             </fieldset>
         </form>

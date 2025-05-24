@@ -168,6 +168,14 @@ form button:hover {
     padding: 20px;
 }
 
+.no-projects {
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    opacity: 70%;
+
+}
+
 .create:hover {
     font-size: xx-large;
     color: red;
@@ -208,6 +216,7 @@ form button:hover {
 .groups-task button {
     font-size: 10px;
     padding: 3px 10px;
+    margin-left: 20px;
     color: beige;
 }
 
@@ -282,7 +291,17 @@ h3 {
     margin-bottom: auto;
 }
 
+.delete-project {
+    color: red;
+    align-self: flex-end;
+    margin: 20px;
+    margin-bottom: auto;
+}
+
 .close-project:hover {
     color: #01ff16;
+}
 
+.delete-project:hover {
+    color: #01ff16;
 }

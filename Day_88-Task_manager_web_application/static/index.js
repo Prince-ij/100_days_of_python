@@ -15,7 +15,7 @@ function addTask() {
 
 function openProject() {
     elem = document.querySelector('.add-task-form');
-    elem.style.display = 'block';
+    elem.style.display = 'flex';
 }
 
 function closeProject() {
