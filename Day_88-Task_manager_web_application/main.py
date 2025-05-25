@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import UserMixin, LoginManager, login_user, current_user
+from flask_login import UserMixin, LoginManager, login_user, current_user, logout_user, login_required
 import os
 from dotenv import load_dotenv
 
@@ -122,6 +122,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     user_projects = current_user.projects
     user_tasks = current_user.tasks
@@ -165,8 +166,50 @@ def delete_task(task_id):
 
 @app.route('/delete_project/<int:project_id>', methods=['GET', 'POST'])
 def delete_project(project_id):
-    project = Task.query.get(project_id)
+    project = Project.query.get(project_id)
     db.session.delete(project)
     db.session.commit()
     flash('Project has been Deleted Successfully', 'success')
     return redirect(url_for('dashboard'))
+
+@app.route('/add_project_task/<int:user_id>/<int:project_id>', methods=['GET', 'POST'])
+def add_project_task(user_id, project_id):
+    if request.method == 'POST':
+        body = request.form.get('body')
+        if body:
+            task = Task(user_id, body, project_id)
+            db.session.add(task)
+            db.session.commit()
+            flash(f'Task Created Successfully', "success")
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Error: Task must be specified', "error")
+            return redirect(url_for('dashboard'))
+    user = User.query.get(user_id)
+    project = Project.query.filter_by(id=project_id).filter_by(user_id=current_user.id).first()
+    return render_template('add_project_task.html', user=user, project=project)
+
+@app.route('/delete_project_task/<int:task_id>/<int:project_id>', methods=['GET', 'POST'])
+def delete_project_task(project_id, task_id):
+    task = Task.query.filter_by(project_id=project_id).filter_by(id=task_id).first()
+    db.session.delete(task)
+    db.session.commit()
+    flash(f'Task deleted Successfully', "success")
+    return redirect(url_for('dashboard'))
+
+@app.route('/project_view/<int:project_id>')
+def project_view(project_id):
+    project = Project.query.filter_by(id=project_id).filter_by(user_id=current_user.id).first()
+    return render_template('open_project.html', user=current_user, project=project)
+
+@app.route('/add_project_task_view/<int:project_id>')
+def view_add(project_id):
+    project = Project.query.filter_by(id=project_id).filter_by(user_id=current_user.id).first()
+    user = User.query.get(current_user.id)
+    return render_template('add_project_task.html', project=project, user=user)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))

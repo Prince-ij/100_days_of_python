@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="../static/styles.css">
+    <title>Add Project Task</title>
+</head>
+<body>
+     <!-- Adding a project Task  -->
+
+            <div class="task-form project">
+                <form action="{{ url_for('add_project_task', user_id=user.id, project_id=project.id) }}" method="post">
+                    <fieldset>
+                        <legend>Add a task for {{ project.name }}</legend>
+                        <input type="text" name="body" placeholder="Task 1">
+                        <input type="submit">
+                    </fieldset>
+                </form>
+            </div>
+</body>
+</html>

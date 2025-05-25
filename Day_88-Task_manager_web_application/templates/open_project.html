@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Project View</title>
+</head>
+<body>
+     <!-- Project View display upon click  -->
+
+             <div class="add-task-form">
+                <h2>Create a Task</h2>
+                <a href="{{ url_for('view_add', project_id=project.id) }}"><button class="add-task">+</button></a>
+                <h3>Tasks</h3>
+                    {% if not project.tasks %}
+                        <p class="no-projects">No Tasks Yet</p>
+                    {% else %}
+                    <div class="groups-task">
+                    {% for task in project.tasks %}
+                        <div><p>{{ task.body }}<sub><a href="{{ url_for('delete_project_task', task_id=task.id, project_id=project.id) }}"><button>✖</button></a></sub></p></div>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                <div class="close-project">
+                   <a href="{{ url_for('dashboard') }}"><button class="close-project">Close Project</button></a>
+                    <a href="{{ url_for('delete_project', project_id=project.id) }}"><button class="delete-project">Delete Project</button></a>
+                </div>
+                </div>
+</body>
+</html>

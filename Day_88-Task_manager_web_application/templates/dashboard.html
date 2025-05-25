@@ -31,9 +31,9 @@
         {% else %}
         <div class="groups-project">
         {% for project in projects %}
-            <button onclick="openProject()">{{ project.name }}</button>
-         {% endfor %}
-        </div>
+            <a href="{{ url_for('project_view', project_id=project.id) }}"><button class="open-project-btn">{{ project.name }}</button></a>
+        {% endfor %}
+         </div>
         {% endif %}
 
     </div>
@@ -42,21 +42,19 @@
         <h2>Create a Task</h2>
         <button class="create" onclick="addTask()">+</button>
         <h3>Tasks</h3>
-         {% if not projects %}
+         {% if not tasks %}
             <p class="no-projects">No Tasks Yet</p>
         {% else %}
         <div class="groups-task">
         {% for task in tasks %}
+            {% if task.project_id == None %}
              <div><p>{{ task.body }}<sub><a href="{{ url_for('delete_task', task_id=task.id) }}"><button>✖</button></a></sub></p></div>
+             {% endif %}
          {% endfor %}
         </div>
         {% endif %}
-
-
-
     </div>
     </div>
-
     <div class="project-form">
         <form action="{{ url_for('create_project', user_id=user.id)}}" method="post">
             <fieldset>
@@ -67,26 +65,9 @@
         </form>
     </div>
 
-    <div class="add-task-form">
-        <h2>Create a Task</h2>
-        <button class="add-task" onclick="addTask()">+</button>
-        <h3>Tasks</h3>
-        <div class="groups-task">
-            <div><p>Eat Fufu and Drink Garri and beans later in the afternoon <sub><button>✖</button></sub></p></div>
-            <div><p>Wash my laundry and dry and iron <sub><button>✖</button></sub></p> </div>
-            <div><p>Task 3 <sub><button>✖</button></sub></p></div>
-            <div><p>Task 5 <sub><button>✖</button></sub></p></div>
-            <div><p>Task 4 <sub><button>✖</button></sub></p></div>
 
-    </div>
-    <div class="close-project">
-        <button class="close-project" onclick="closeProject()">Close Project</button>
-        <button class="delete-project" onclick="closeProject()">Delete Project</button>
-    </div>
 
-    </div>
-
-    <div class="task-form">
+    <div class="task-form regular">
         <form action="{{ url_for('create_task', user_id=user.id)}}" method="post">
             <fieldset>
                 <legend>Add a task</legend>
@@ -96,6 +77,7 @@
         </form>
     </div>
 
+    <a href="{{ url_for('logout') }}"><button class="logout">Log Out</button></a>
     <script src="../static/index.js"></script>
 </body>
 </html>

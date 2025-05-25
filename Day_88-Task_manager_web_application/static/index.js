@@ -9,16 +9,8 @@ function addProject() {
 }
 
 function addTask() {
-    elem = document.querySelector('.task-form');
+    elem = document.querySelector('.task-form.regular');
     elem.style.display = 'block';
 }
 
-function openProject() {
-    elem = document.querySelector('.add-task-form');
-    elem.style.display = 'flex';
-}
 
-function closeProject() {
-    elem = document.querySelector('.add-task-form');
-    elem.style.display = 'none';
-}
