@@ -1,0 +1,5 @@
+.env
+*.pycache
+*.mp3
+*.pdf
+.venv
