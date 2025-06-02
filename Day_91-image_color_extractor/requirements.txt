@@ -4,3 +4,4 @@ webcolors
 pillow
 plotly
 pandas
+gunicorn
