@@ -1,0 +1,6 @@
+flask
+extcolors
+webcolors
+pillow
+plotly
+pandas
