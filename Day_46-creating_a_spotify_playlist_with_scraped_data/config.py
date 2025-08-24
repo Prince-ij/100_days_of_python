@@ -1,5 +1,0 @@
-CLIENT_ID = "d433ca79352a4be39879c6b556fde5d9"
-CLIENT_SECRET = "b1f2c5f6fd5748fd985580b6c2cce2de"
-REDIRECT_URI = "https://www.google.com"
-USER_ID = "3176lp3ewzq3kupshckz4j7p2yn4"
-USER_URI = "spotify:user:3176lp3ewzq3kupshckz4j7p2yn4"
