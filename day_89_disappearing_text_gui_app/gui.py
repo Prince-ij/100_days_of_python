@@ -1,4 +1,3 @@
-from idlelib.configdialog import font_sample_text
 from tkinter import *
 
 class GUI:
@@ -48,5 +47,3 @@ class GUI:
 
     def reset(self, event):
         self.count = 6
-
-
