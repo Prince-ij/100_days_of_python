@@ -1,3 +1,3 @@
 from home import GUI
 
-GUI 
+GUI()
