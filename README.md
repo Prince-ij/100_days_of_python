@@ -3,8 +3,8 @@
 Welcome to my 100 Days of Python repository! 🚀 This comprehensive collection showcases my transformation from a Python beginner to a professional-level developer through structured, project-driven learning.
 
 ## 📊 Journey Overview
-- **Progress**: 92/100 Days Complete ✅
-- **Total Projects**: 92+ Real-World Applications
+- **Progress**: 93/100 Days Complete ✅
+- **Total Projects**: 93+ Real-World Applications
 - **Course**: Angela Yu's 100 Days of Python (Udemy)
 - **Duration**: Consistent daily coding practice
 - **Achievement**: Professional-level Python development skills
@@ -58,12 +58,11 @@ Welcome to my 100 Days of Python repository! 🚀 This comprehensive collection 
 - Data visualization with Plotly
 - Desktop application development
 
-**Current Projects:**
+**Some Advanced Projects:**
 - 📋 Task Manager Web Application (`Day_88`)
 - 🎨 Image Color Extractor (`Day_91`)
 - 🖼️ Image Watermarking Desktop App (`Day_84`)
 - ⌨️ Typing Trainer Application (`Day_85`)
-- 🚀 Latest Project Completed (`Day_92`)
 
 ## 💻 **Technical Skills Portfolio**
 
@@ -105,11 +104,11 @@ Welcome to my 100 Days of Python repository! 🚀 This comprehensive collection 
 
 ## 📈 **Key Achievements**
 
-✅ **92 consecutive days** of coding practice
-✅ **Production-ready** web applications with deployment
-✅ **Full-stack competency** from frontend to database
-✅ **Data science proficiency** with real-world datasets
-✅ **Professional code quality** with proper architecture
+✅ **93 consecutive days** of coding practice <br>
+✅ **Production-ready** web applications with deployment<br>
+✅ **Full-stack competency** from frontend to database<br>
+✅ **Data science proficiency** with real-world datasets<br>
+✅ **Professional code quality** with proper architecture<br>
 ✅ **Industry-standard tools** and best practices
 
 ## 🎓 **Skills Demonstration**
