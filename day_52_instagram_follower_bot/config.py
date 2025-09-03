@@ -1,0 +1,2 @@
+PASSWORD = 'YOURPASSWORD'
+USERNAME = 'BabyGirly_opp'

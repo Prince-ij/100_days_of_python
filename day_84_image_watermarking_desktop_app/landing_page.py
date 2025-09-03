@@ -2,7 +2,6 @@ from tkinter import *
 from edit import Edit
 
 
-
 class LandingPage:
     def __init__(self):
         self.root = Tk()

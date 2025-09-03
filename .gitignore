@@ -171,6 +171,5 @@ ehthumbs.db
 Thumbs.db
 
 # Config files with sensitive data
-config.py
 .cache
 *.db

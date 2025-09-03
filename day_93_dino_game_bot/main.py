@@ -1,3 +1,6 @@
+# Few Codes but much thinking
+# Head over to chrome://dino/ on your chrome browser and test it out
+
 import pyautogui
 import time
 

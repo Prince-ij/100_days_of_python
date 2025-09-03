@@ -67,7 +67,7 @@ class Typer:
                 if typed_words[i] == actual_words[i]:
                     num_of_correct += 1
             self.accuracy = (num_of_correct / len(typed_words)) * 100
-            if self.speed >=  WPM[self.current_level] and self.accuracy > 89:
+            if self.speed >=  WPM[self.current_level] and self.accuracy > 85:
                 self.res = 'win'
             else:
                 self.res = 'lose'

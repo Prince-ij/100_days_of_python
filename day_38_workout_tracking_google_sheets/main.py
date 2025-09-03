@@ -2,7 +2,7 @@ import requests
 from datetime import datetime
 
 NUTRI_APP_ID = "925cd0bf"
-NUTRI_API_KEY = "a904e7b895a1af1fbfbda3c9d9427392"
+NUTRI_API_KEY = "a904e7b895a1af1fbfbda3c9d9427hj"
 SHEETY_ENDPOINT = "https://api.sheety.co/6b6765598b14bcc76dd5f56907784aa4/workoutTracker/sheet1"
 
 ENDPOINT = "https://trackapi.nutritionix.com/v2/natural/exercise"
