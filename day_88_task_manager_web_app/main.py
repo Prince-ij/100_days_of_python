@@ -167,7 +167,10 @@ def delete_task(task_id):
 @app.route('/delete_project/<int:project_id>', methods=['GET', 'POST'])
 def delete_project(project_id):
     project = Project.query.get(project_id)
+    tasks = project.tasks
     db.session.delete(project)
+    for task in tasks:
+        db.session.delete(task)
     db.session.commit()
     flash('Project has been Deleted Successfully', 'success')
     return redirect(url_for('dashboard'))
@@ -213,3 +216,6 @@ def view_add(project_id):
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)

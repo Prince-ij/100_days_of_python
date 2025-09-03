@@ -1,32 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
-    <title>Sign Up</title>
-</head>
-<body>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="message" onclick="errorBtn()">
-                    <p>{{ message }}</p>
-                    <button>X</button>
+{% extends "base.html" %}
+
+{% block title %}Sign Up - TaskLight{% endblock %}
+
+{% block content %}
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3 py-4">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4 p-md-5">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <i class="bi bi-person-plus text-primary mb-3" style="font-size: clamp(2.5rem, 6vw, 3rem);"></i>
+                        <h2 class="fw-bold text-dark mb-2" style="font-size: clamp(1.5rem, 4vw, 2rem);">Create Account</h2>
+                        <p class="text-muted mb-0" style="font-size: clamp(0.875rem, 2.5vw, 1rem);">Join TaskLight to manage your tasks efficiently</p>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <form action="{{ url_for('register') }}" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-medium">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-envelope text-muted"></i>
+                                </span>
+                                <input type="email" class="form-control border-start-0 ps-0" id="email" name="email"
+                                       placeholder="Enter your email" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="passwd" class="form-label fw-medium">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-lock text-muted"></i>
+                                </span>
+                                <input type="password" class="form-control border-start-0 ps-0" id="passwd" name="passwd"
+                                       placeholder="Create a password" required minlength="6" autocomplete="new-password">
+                            </div>
+                            <div class="form-text small">Password must be at least 6 characters long</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="cpasswd" class="form-label fw-medium">Confirm Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-lock-fill text-muted"></i>
+                                </span>
+                                <input type="password" class="form-control border-start-0 ps-0" id="cpasswd" name="cpasswd"
+                                       placeholder="Confirm your password" required minlength="6" autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-3 mb-3">
+                            <i class="bi bi-person-plus me-2"></i>Create Account
+                        </button>
+                    </form>
+
+                    <!-- Footer -->
+                    <div class="text-center">
+                        <p class="text-muted mb-0 small">Already have an account?
+                            <a href="{{ url_for('login') }}" class="text-primary text-decoration-none fw-medium">
+                                Sign in here
+                            </a>
+                        </p>
+                    </div>
                 </div>
-            {% endfor %}
-         {% endif %}
-       {% endwith %}
+            </div>
 
+            <!-- Back to Home -->
+            <div class="text-center mt-3">
+                <a href="{{ url_for('home') }}" class="text-white text-decoration-none">
+                    <i class="bi bi-arrow-left me-1"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <form action="{{ url_for('register') }}" method="post" class="login">
-        <h1>Sign Up</h1>
-        <input type="email" placeholder="Email" name="email" required>
-        <input type="password", name="passwd", placeholder="password" required>
-        <input type="password", name="cpasswd", placeholder="Confirm password" required>
-        <button>Sign Up</button>
-    </form>
+{% block extra_js %}
+<script>
+    // Password confirmation validation
+    document.addEventListener('DOMContentLoaded', function() {
+        const password = document.getElementById('passwd');
+        const confirmPassword = document.getElementById('cpasswd');
+        const form = password.closest('form');
 
-    <script src="../static/index.js"></script>
-</body>
-</html>
+        function validatePassword() {
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords don't match");
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        }
+
+        password.addEventListener('change', validatePassword);
+        confirmPassword.addEventListener('keyup', validatePassword);
+    });
+</script>
+{% endblock %}
+{% endblock %}

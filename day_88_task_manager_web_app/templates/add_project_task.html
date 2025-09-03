@@ -1,22 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="../static/styles.css">
-    <title>Add Project Task</title>
-</head>
-<body>
-     <!-- Adding a project Task  -->
+{% extends "base.html" %}
 
-            <div class="task-form project">
-                <form action="{{ url_for('add_project_task', user_id=user.id, project_id=project.id) }}" method="post">
-                    <fieldset>
-                        <legend>Add a task for {{ project.name }}</legend>
-                        <input type="text" name="body" placeholder="Task 1">
-                        <input type="submit">
-                    </fieldset>
-                </form>
+{% block title %}Add Task - {{ project.name }} - TaskLight{% endblock %}
+
+{% block content %}
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+    <div class="row w-100">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-white py-4">
+                    <div class="text-center">
+                        <i class="bi bi-plus-circle text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h3 class="fw-bold text-dark mb-2">Add New Task</h3>
+                        <p class="text-muted mb-0">Add a task to project: <span class="fw-medium text-primary">{{ project.name }}</span></p>
+                    </div>
+                </div>
+
+                <div class="card-body p-5">
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+                                    <i class="bi bi-house-door me-1"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ url_for('project_view', project_id=project.id) }}" class="text-decoration-none">
+                                    {{ project.name }}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active">Add Task</li>
+                        </ol>
+                    </nav>
+
+                    <!-- Add Task Form -->
+                    <form action="{{ url_for('add_project_task', user_id=user.id, project_id=project.id) }}" method="post">
+                        <div class="mb-4">
+                            <label for="taskBody" class="form-label fw-medium">Task Description</label>
+                            <textarea class="form-control" id="taskBody" name="body" rows="4"
+                                      placeholder="Describe what needs to be done..." required autofocus></textarea>
+                            <div class="form-text">Be specific about what needs to be accomplished</div>
+                        </div>
+
+                        <div class="d-flex gap-3 justify-content-end">
+                            <a href="{{ url_for('project_view', project_id=project.id) }}" class="btn btn-outline-secondary px-4">
+                                <i class="bi bi-arrow-left me-2"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-plus-circle me-2"></i>Add Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-</body>
-</html>
+
+            <!-- Project Info -->
+            <div class="card mt-4 bg-light border-0">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold mb-1">
+                                <i class="bi bi-folder me-2 text-primary"></i>{{ project.name }}
+                            </h6>
+                            <small class="text-muted">
+                                <i class="bi bi-list-task me-1"></i>{{ project.tasks|length }} existing tasks
+                            </small>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <a href="{{ url_for('project_view', project_id=project.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye me-1"></i>View Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Auto-focus the textarea and set cursor at the end
+    document.addEventListener('DOMContentLoaded', function() {
+        const textarea = document.getElementById('taskBody');
+        textarea.focus();
+        textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+    });
+</script>
+{% endblock %}
+{% endblock %}

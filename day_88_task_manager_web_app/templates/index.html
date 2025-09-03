@@ -1,32 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
-    <title>Home - Task Manager</title>
-</head>
-<body>
-    <nav>
-        <p>TaskLight</p>
-        <a href="{{ url_for('register') }}">Sign Up</a>
-        <a href="{{ url_for('login') }}">Log In</a>
-    </nav>
-    <div class="hero">
-        <h1>TaskLight</h1>
-        <p>The World's simplest Task Manager. Just create a project and manage your tasks under it.</p>
+{% extends "base.html" %}
 
+{% block title %}TaskLight - Simple Task Management{% endblock %}
+
+{% block content %}
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3 py-4">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 text-center">
+            <!-- Hero Section -->
+            <div class="hero-section p-3 p-md-4 p-lg-5 mb-4 mb-md-5">
+                <div class="mb-3 mb-md-4">
+                    <i class="bi bi-kanban text-white" style="font-size: clamp(3rem, 8vw, 4rem);"></i>
+                </div>
+                <h1 class="fw-bold text-white mb-3 mb-md-4" style="font-size: clamp(2rem, 8vw, 3.5rem);">TaskLight</h1>
+                <p class="lead text-white-50 mb-4 mb-md-5" style="font-size: clamp(1rem, 4vw, 1.25rem);">
+                    The world's simplest task manager. Create projects and manage your tasks with ease.
+                </p>
+
+                <!-- Feature Cards -->
+                <div class="row g-3 g-md-4 mb-4 mb-md-5">
+                    <div class="col-12 col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <i class="bi bi-folder-plus text-primary mb-3" style="font-size: clamp(2rem, 5vw, 2.5rem);"></i>
+                                <h5 class="card-title">Create Projects</h5>
+                                <p class="card-text text-muted small">Organize your work into projects for better management</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <i class="bi bi-list-task text-success mb-3" style="font-size: clamp(2rem, 5vw, 2.5rem);"></i>
+                                <h5 class="card-title">Manage Tasks</h5>
+                                <p class="card-text text-muted small">Add, edit, and track your tasks efficiently</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <i class="bi bi-graph-up text-info mb-3" style="font-size: clamp(2rem, 5vw, 2.5rem);"></i>
+                                <h5 class="card-title">Track Progress</h5>
+                                <p class="card-text text-muted small">Monitor your productivity and achievements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg px-4 px-md-5 py-3">
+                        <i class="bi bi-person-plus me-2"></i>Get Started
+                    </a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light btn-lg px-4 px-md-5 py-3">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="action">
-         <h3>It's just a sign up away to start using the application</h3>
-        <button><a href="{{ url_for('register') }}">Sign Up</a>
-        </button>
-    </div>
-    
-    <footer>
-        Copyright @ prince Ij
-    </footer>
-
-</body>
-</html>
+</div>
+{% endblock %}
